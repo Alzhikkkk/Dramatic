@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/header";
+import Main from "./pages/main";
+import Footer from './components/footer';
+import { Routes, Route, useLocation} from "react-router-dom";
+import {Provider} from 'react-redux'
+import configureStore from './store';
+import Movie from "./pages/movie";
 
+const store = configureStore()
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+       
+      <div className="App">
+        <Header />
+          <Routes>
+            <Route path='/' element={<Main/>}/>
+            <Route path='/movie/:id' element={<Movie />}/>
+            <Route path='/movie/:id/:media' element={<Movie />}/>
+          </Routes>
+        <Footer />
+      </div>
+      
+    </Provider>
   );
 }
 
